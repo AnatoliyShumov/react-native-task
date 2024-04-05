@@ -1,0 +1,7 @@
+export const settingsActionTypes = {
+  RESET_ALL: "RESET_ALL",
+
+  CHANGE_LANGUAGE_SUCCESS: 'CHANGE_LANGUAGE_SUCCESS',
+
+  CLEAR_ERROR: 'CLEAR_ERROR',
+};
