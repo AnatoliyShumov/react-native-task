@@ -19,6 +19,7 @@ type IProps = {
 
 // @ts-ignore
 const flattenMessages = (nestedMessages: any, prefix = '') =>
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Object.keys(nestedMessages).reduce((messages, key) => {
     const value = nestedMessages[key];
     const prefixedKey = prefix ? `${prefix}.${key}` : key;
