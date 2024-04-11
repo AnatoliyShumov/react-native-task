@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.layoutPaddingH,
     paddingVertical: spacing.layoutPaddingH,
     borderRadius: spacing.borderRadius,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#fff',
+    // borderWidth: StyleSheet.hairlineWidth,
+    // borderColor: '#fff',
   },
 });
 

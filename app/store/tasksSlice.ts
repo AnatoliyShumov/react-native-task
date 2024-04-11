@@ -2,8 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export type Task = {
   id: string;
-  title: string;
-  done: boolean;
+  nameAvatarOne: string;
+  imageAvatarOne: string;
+  nameAvatarSecond: string;
+  imageAvatarSecond: string;
+  timeCreated: string;
+  location: string;
 };
 
 export type InitialState = {
@@ -16,13 +20,21 @@ const initialState: InitialState = {
   entities: [
     {
       id: '1',
-      title: 'Task 1',
-      done: false,
+      nameAvatarOne: 'Team 1',
+      imageAvatarOne: 'one',
+      nameAvatarSecond: 'Team 1',
+      imageAvatarSecond: 'one',
+      timeCreated: '03:45 AM, Sat, Jan 6, 2024',
+      location: 'Cleveland Browns Stadium',
     },
     {
       id: '2',
-      title: 'Task 2',
-      done: false,
+      nameAvatarOne: 'Team 1',
+      imageAvatarOne: 'one',
+      nameAvatarSecond: 'Team 1',
+      imageAvatarSecond: 'one',
+      timeCreated: '03:45 AM, Sat, Jan 6, 2024',
+      location: 'Cleveland Browns Stadium',
     },
   ],
 };
