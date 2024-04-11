@@ -53,7 +53,7 @@ const typeSizes: typeSizesType = {
 const themes: themesType = {
   light: {
     name: 'light',
-    color: '#695D5D',
+    color: 'white',
     primary: '#EF936E',
     layoutBg: '#292F3D',
     cardBg: '#4D5265',
@@ -63,7 +63,7 @@ const themes: themesType = {
   },
   dark: {
     name: 'dark',
-    color: '#ffffff',
+    color: 'white',
     primary: '#EF936E',
     layoutBg: '#121212',
     cardBg: '#1e1e1e',

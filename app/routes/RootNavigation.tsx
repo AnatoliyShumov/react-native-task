@@ -4,14 +4,18 @@
  * Uncomment commented lines from return() of RootNavigation to wire Login flow
  */
 import React, {useEffect} from 'react';
-import {ColorValue, Text} from 'react-native';
+import {ColorValue, Text, View} from 'react-native';
 
+import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import Home from '../assets/images/components/Home';
+import Reservation from '../assets/images/components/Reservation';
+import Table from '../assets/images/components/Table';
+import Help from '../assets/images/components/Help';
 // import {useSelector, useDispatch} from 'react-redux';
 
 // Hook for theme change (Light/Dark Mode)
@@ -28,13 +32,34 @@ import {updateToken} from '../store/userSlice';
 import Tasks from '../screens/TaskView';
 import NetworkExample from '../screens/NetworkExample';
 import Settings from '../screens/Settings';
-import Header from "../components/Header";
+import Header from '../components/Header';
 
 // Icons for Bottom Tab Navigation
 const homeIcon = ({color}: {color: ColorValue | number}) => (
   <>
     <Home name="list-sharp" size={30} color={color} />
     <Text style={{color}}>Home</Text>
+  </>
+);
+
+const reservationIcon = ({color}: {color: ColorValue | number}) => (
+  <>
+    <Reservation name="list-sharp" size={30} color={color} />
+    <Text style={{color}}>Reservation</Text>
+  </>
+);
+
+const tableIcon = ({color}: {color: ColorValue | number}) => (
+  <>
+    <Table name="list-sharp" size={30} color={color} />
+    <Text style={{color}}>Table</Text>
+  </>
+);
+
+const helpIcon = ({color}: {color: ColorValue | number}) => (
+  <>
+    <Help name="list-sharp" size={30} color={color} />
+    <Text style={{color}}>Help</Text>
   </>
 );
 const networkIcon = ({color}: {color: ColorValue | number}) => (
@@ -47,6 +72,42 @@ const settingsIcon = ({color}: {color: ColorValue | number}) => (
 // Root Navigation
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const TaskStack = createStackNavigator();
+
+const TaskStackScreen = () => {
+  return (
+    <TaskStack.Navigator>
+      <TaskStack.Screen
+        name="Tasks-1"
+        component={Tasks}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => (
+            <Header
+              title="Tasks-1"
+              onLeftPress={() => navigation.navigate('Tasks-2')} // Навігація до Tasks-2
+              onRightPress={() => console.log('Pressed Right for Tasks-1')}
+            />
+          ),
+        })}
+      />
+      <TaskStack.Screen
+        name="Tasks-2"
+        component={Tasks}
+        options={{
+          headerShown: true,
+          header: () => (
+            <Header
+              title="Tasks-2"
+              onLeftPress={() => console.log('Pressed Left for Tasks-2')}
+              onRightPress={() => console.log('Pressed Right for Tasks-2')}
+            />
+          ),
+        }}
+      />
+    </TaskStack.Navigator>
+  );
+};
 
 export default function RootNavigation() {
   const {theme} = useTheme();
@@ -73,22 +134,25 @@ export default function RootNavigation() {
           tabBarStyle: {
             backgroundColor: theme.cardBg,
             borderTopColor: theme?.layoutBg,
+            height: 70,
           },
           tabBarInactiveTintColor: theme.color,
           tabBarActiveTintColor: theme.primary,
-          headerStyle: {backgroundColor: 'red', height: 20},
+          headerStyle: {backgroundColor: 'red', height: 60},
           headerTitleAlign: 'center',
-          headerTitleStyle: {
-            // color: theme.primary,
-            // fontSize: 18,
-            // fontWeight: 'bold',
-          },
           headerShown: false,
           tabBarShowLabel: false,
         }}>
         <Tab.Screen
-          name="To Do"
-          component={Tasks}
+          name="Tasks"
+          component={TaskStackScreen}
+          options={{
+            tabBarIcon: homeIcon,
+          }}
+        />
+        <Tab.Screen
+          name="NetworkExample"
+          component={NetworkExample}
           options={{
             headerShown: true,
             header: () => (
@@ -98,42 +162,40 @@ export default function RootNavigation() {
                 onRightPress={() => console.log('Pressed Right')}
               />
             ),
-            tabBarIcon: homeIcon,
-          }}
-        />
-        <Tab.Screen
-          name="NetworkExample"
-          component={NetworkExample}
-          options={{
-            tabBarIcon: networkIcon,
+            tabBarIcon: reservationIcon,
           }}
         />
         <Tab.Screen
           name="Settings"
           component={Settings}
           options={{
-            // headerShown: false,
-            tabBarIcon: settingsIcon,
+            headerShown: true,
+            header: () => (
+              <Header
+                title=""
+                onLeftPress={() => console.log('Pressed Left')}
+                onRightPress={() => console.log('Pressed Right')}
+              />
+            ),
+            tabBarIcon: tableIcon,
           }}
         />
-        {/*<Tab.Screen*/}
-        {/*  name="Table"*/}
-        {/*  component={Table}*/}
-        {/*  options={{*/}
-        {/*    // headerShown: false,*/}
-        {/*    tabBarIcon: settingsIcon,*/}
-        {/*  }}*/}
-        {/*/>*/}
+        <Tab.Screen
+          name="Settings2"
+          component={Settings}
+          options={{
+            headerShown: true,
+            header: () => (
+              <Header
+                title=""
+                onLeftPress={() => console.log('Pressed Left')}
+                onRightPress={() => console.log('Pressed Right')}
+              />
+            ),
+            tabBarIcon: helpIcon,
+          }}
+        />
       </Tab.Navigator>
-
-      {/* ) : (
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Login" component={Login} />
-        </Stack.Navigator>
-        )} */}
     </NavigationContainer>
   );
 }
