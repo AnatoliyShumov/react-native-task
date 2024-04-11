@@ -9,12 +9,14 @@ import {ThemeContextInterface} from '../theme/useTheme';
 const Layout = ({children, style}: LayoutPropsType) => {
   const {theme}: Partial<ThemeContextInterface> = useTheme();
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        animated
-        backgroundColor={theme.cardBg}
-        barStyle={theme?.name === 'light' ? 'dark-content' : 'light-content'}
-      />
+    <SafeAreaView
+      edges={['left', 'right', 'bottom']}
+      style={[styles.container, {backgroundColor: 'white'}]}>
+      {/*<StatusBar*/}
+      {/*  animated*/}
+      {/*  backgroundColor={theme.cardBg}*/}
+      {/*  barStyle={theme?.name === 'light' ? 'dark-content' : 'light-content'}*/}
+      {/*/>*/}
       <View
         testID="Layout.LayoutContainer"
         style={[styles.layout, {backgroundColor: theme?.layoutBg}, style]}>
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
   container: {flex: 1},
   layout: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'green',
   },
 });

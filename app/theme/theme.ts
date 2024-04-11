@@ -56,7 +56,7 @@ const themes: themesType = {
     color: '#695D5D',
     primary: '#EF936E',
     layoutBg: '#292F3D',
-    cardBg: '#ffffff',
+    cardBg: '#4D5265',
     cardBorderColor: '#EEECEC',
     accent: '#0071ff',
     error: '#B00020',

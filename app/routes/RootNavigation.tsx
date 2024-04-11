@@ -28,6 +28,7 @@ import {updateToken} from '../store/userSlice';
 import Tasks from '../screens/TaskView';
 import NetworkExample from '../screens/NetworkExample';
 import Settings from '../screens/Settings';
+import Header from "../components/Header";
 
 // Icons for Bottom Tab Navigation
 const homeIcon = ({color}: {color: ColorValue | number}) => (
@@ -75,19 +76,28 @@ export default function RootNavigation() {
           },
           tabBarInactiveTintColor: theme.color,
           tabBarActiveTintColor: theme.primary,
-          headerStyle: {backgroundColor: theme.cardBg, height: 50},
+          headerStyle: {backgroundColor: 'red', height: 20},
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            color: theme.primary,
-            fontSize: 18,
-            fontWeight: 'bold',
+            // color: theme.primary,
+            // fontSize: 18,
+            // fontWeight: 'bold',
           },
+          headerShown: false,
           tabBarShowLabel: false,
         }}>
         <Tab.Screen
           name="To Do"
           component={Tasks}
           options={{
+            headerShown: true,
+            header: () => (
+              <Header
+                title=""
+                onLeftPress={() => console.log('Pressed Left')}
+                onRightPress={() => console.log('Pressed Right')}
+              />
+            ),
             tabBarIcon: homeIcon,
           }}
         />
