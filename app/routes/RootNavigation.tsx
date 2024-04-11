@@ -4,13 +4,14 @@
  * Uncomment commented lines from return() of RootNavigation to wire Login flow
  */
 import React, {useEffect} from 'react';
-import {ColorValue} from 'react-native';
+import {ColorValue, Text} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
+import Home from '../assets/images/components/Home';
 // import {useSelector, useDispatch} from 'react-redux';
 
 // Hook for theme change (Light/Dark Mode)
@@ -30,7 +31,10 @@ import Settings from '../screens/Settings';
 
 // Icons for Bottom Tab Navigation
 const homeIcon = ({color}: {color: ColorValue | number}) => (
-  <Icon name="list-sharp" size={30} color={color} />
+  <>
+    <Home name="list-sharp" size={30} color={color} />
+    <Text style={{color}}>Home</Text>
+  </>
 );
 const networkIcon = ({color}: {color: ColorValue | number}) => (
   <Icon name="wifi-sharp" size={24} color={color} />
@@ -56,6 +60,7 @@ export default function RootNavigation() {
         dispatch(updateToken({token: temp}));
       } catch (e) {}
     }
+
     checkIsLogined();
   }, [dispatch]);
 
