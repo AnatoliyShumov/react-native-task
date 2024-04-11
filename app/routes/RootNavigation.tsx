@@ -24,7 +24,7 @@ import {updateToken} from '../store/userSlice';
 
 // Screens
 // import Login from '../screens/auth/Login';
-import Tasks from '../screens/Tasks';
+import Tasks from '../screens/TaskView';
 import NetworkExample from '../screens/NetworkExample';
 import Settings from '../screens/Settings';
 
@@ -101,7 +101,16 @@ export default function RootNavigation() {
             tabBarIcon: settingsIcon,
           }}
         />
+        {/*<Tab.Screen*/}
+        {/*  name="Table"*/}
+        {/*  component={Table}*/}
+        {/*  options={{*/}
+        {/*    // headerShown: false,*/}
+        {/*    tabBarIcon: settingsIcon,*/}
+        {/*  }}*/}
+        {/*/>*/}
       </Tab.Navigator>
+
       {/* ) : (
         <Stack.Navigator
           screenOptions={{

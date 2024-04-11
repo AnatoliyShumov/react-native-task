@@ -1,16 +1,16 @@
 import React, {useState, useRef} from 'react';
-import {StyleSheet, FlatList, View, TextInput} from 'react-native';
+import {StyleSheet, FlatList, TextInput} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {taskAdded, taskToggled} from '../store/tasksSlice';
-import {RootState} from '../store/store';
-import {Task} from '../store/tasksSlice';
+import {taskAdded, taskToggled} from '../../store/tasksSlice';
+import {RootState} from '../../store/store';
+import {Task} from '../../store/tasksSlice';
 
-import {useTheme} from '../theme/useTheme';
-import Layout from '../components/Layout';
-import Card from '../components/Card';
-import ListItem from '../components/ListItem';
-import PhotoIcoSvg from '../assets/images/components/Rocket.tsx';
+import {useTheme} from '../../theme/useTheme';
+import Layout from '../../components/Layout';
+// import Card from '../../components/Card';
+import ListItem from './components/ListItem';
+import PhotoIcoSvg from '../../assets/images/components/Rocket.tsx';
 
 const Tasks = () => {
   const {theme} = useTheme();
@@ -50,34 +50,31 @@ const Tasks = () => {
         keyExtractor={keyExtractor}
         contentContainerStyle={styles.flatList}
       />
-      {/* Tasks Listing ends here */}
-
-      <Card
-        style={[styles.inputCard, {borderTopColor: theme?.cardBorderColor}]}>
-        {/* TextInput and InputButton starts here */}
-        <PhotoIcoSvg />
-        <View style={styles.inputBtnRow}>
-          <View style={styles.inputBtnWrp}>
-            <TextInput
-              testID="Tasks.newTaskInput"
-              ref={inputRef}
-              placeholder="New Task"
-              placeholderTextColor={theme?.color}
-              style={[
-                styles.input,
-                {
-                  color: theme?.color,
-                  backgroundColor: theme?.layoutBg,
-                  borderColor: theme?.layoutBg,
-                },
-              ]}
-              onChangeText={t => setText(t)}
-              onSubmitEditing={() => addNewTask()}
-            />
-          </View>
-        </View>
-        {/* TextInput and InputButton ends here */}
-      </Card>
+      {/*<Card*/}
+      {/*  style={[styles.inputCard, {borderTopColor: theme?.cardBorderColor}]}>*/}
+      {/*  /!* TextInput and InputButton starts here *!/*/}
+      {/*  <PhotoIcoSvg />*/}
+      {/*  <View style={styles.inputBtnRow}>*/}
+      {/*    <View style={styles.inputBtnWrp}>*/}
+      {/*      <TextInput*/}
+      {/*        testID="Tasks.newTaskInput"*/}
+      {/*        ref={inputRef}*/}
+      {/*        placeholder="New Task"*/}
+      {/*        placeholderTextColor={theme?.color}*/}
+      {/*        style={[*/}
+      {/*          styles.input,*/}
+      {/*          {*/}
+      {/*            color: theme?.color,*/}
+      {/*            backgroundColor: theme?.layoutBg,*/}
+      {/*            borderColor: theme?.layoutBg,*/}
+      {/*          },*/}
+      {/*        ]}*/}
+      {/*        onChangeText={t => setText(t)}*/}
+      {/*        onSubmitEditing={() => addNewTask()}*/}
+      {/*      />*/}
+      {/*    </View>*/}
+      {/*  </View>*/}
+      {/*</Card>*/}
     </Layout>
   );
 };
