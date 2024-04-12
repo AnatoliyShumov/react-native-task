@@ -30,6 +30,7 @@ import {updateToken} from '../store/userSlice';
 // Screens
 // import Login from '../screens/auth/Login';
 import Tasks from '../screens/TaskView';
+import TaskCreateView from '../screens/TaskCreateView';
 import NetworkExample from '../screens/NetworkExample';
 import Settings from '../screens/Settings';
 import Header from '../components/Header';
@@ -79,7 +80,7 @@ const TaskStackScreen = () => {
     <TaskStack.Navigator>
       <TaskStack.Screen
         name="Tasks-1"
-        component={Tasks}
+        component={TaskCreateView}
         options={({navigation}) => ({
           headerShown: true,
           header: () => (
