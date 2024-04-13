@@ -31,6 +31,7 @@ import {updateToken} from '../store/userSlice';
 // import Login from '../screens/auth/Login';
 import Tasks from '../screens/TaskView';
 import TaskCreateView from '../screens/TaskCreateView';
+import ReservationView from '../screens/ReservationView';
 import NetworkExample from '../screens/NetworkExample';
 import Settings from '../screens/Settings';
 import Header from '../components/Header';
@@ -80,7 +81,7 @@ const TaskStackScreen = () => {
     <TaskStack.Navigator>
       <TaskStack.Screen
         name="TasksList"
-        component={Tasks}
+        component={ReservationView}
         options={({navigation}) => ({
           headerShown: true,
           header: () => (
