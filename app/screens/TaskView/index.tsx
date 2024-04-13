@@ -1,34 +1,31 @@
 import React, {useState, useRef} from 'react';
-import {StyleSheet, FlatList, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  TextInput,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {taskAdded, taskToggled} from '../../store/tasksSlice';
+import {taskToggled} from '../../store/tasksSlice';
 import {RootState} from '../../store/store';
 import {Task} from '../../store/tasksSlice';
 
-import {useTheme} from '../../theme/useTheme';
 import Layout from '../../components/Layout';
-// import Card from '../../components/Card';
 import ListItem from './components/ListItem';
-import PhotoIcoSvg from '../../assets/images/components/Rocket.tsx';
+import {useNavigation} from '@react-navigation/native';
 
 const Tasks = () => {
-  const {theme} = useTheme();
-
-  const inputRef = useRef<TextInput>(null);
+  const navigation = useNavigation();
 
   const todoList = useSelector((state: RootState) => state.todos.entities);
   // const loadingStatus = useSelector((state) => state.todos.status);
   const dispatch = useDispatch();
 
-  const [text, setText] = useState('');
-
   const addNewTask = () => {
-    let temp = text.trim();
-    if (temp !== '') {
-      dispatch(taskAdded({id: Date.now(), title: temp, done: false}));
-    }
-    inputRef.current?.clear();
+    // @ts-ignore
+    navigation.navigate('TasksCreate');
   };
 
   const onCheckedHandler = (id: string) => {
@@ -44,12 +41,16 @@ const Tasks = () => {
   return (
     <Layout>
       {/* Tasks Listing starts here */}
+      <Text style={styles.titleGame}>All Match</Text>
       <FlatList
         data={todoList}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         contentContainerStyle={styles.flatList}
       />
+      <TouchableOpacity onPress={addNewTask} style={styles.addButton}>
+        <Text style={styles.addButtonText}>Add</Text>
+      </TouchableOpacity>
     </Layout>
   );
 };
@@ -66,5 +67,27 @@ const styles = StyleSheet.create({
   flatList: {
     paddingHorizontal: 12,
     paddingVertical: 30,
+  },
+  titleGame: {
+    fontSize: 36,
+    fontWeight: '700',
+    color: 'white',
+    marginTop: 30,
+    alignSelf: 'center',
+  },
+  addButton: {
+    backgroundColor: '#FE734C',
+    padding: 15,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 'auto',
+    marginBottom: 20,
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 18,
   },
 });

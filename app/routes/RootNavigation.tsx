@@ -79,32 +79,32 @@ const TaskStackScreen = () => {
   return (
     <TaskStack.Navigator>
       <TaskStack.Screen
-        name="Tasks-1"
-        component={TaskCreateView}
+        name="TasksList"
+        component={Tasks}
         options={({navigation}) => ({
           headerShown: true,
           header: () => (
             <Header
               title="Tasks-1"
-              onLeftPress={() => navigation.navigate('Tasks-2')} // Навігація до Tasks-2
+              onLeftPress={() => navigation.navigate('TasksList')} // Навігація до Tasks-2
               onRightPress={() => console.log('Pressed Right for Tasks-1')}
             />
           ),
         })}
       />
       <TaskStack.Screen
-        name="Tasks-2"
-        component={Tasks}
-        options={{
+        name="TasksCreate"
+        component={TaskCreateView}
+        options={({navigation}) => ({
           headerShown: true,
           header: () => (
             <Header
-              title="Tasks-2"
-              onLeftPress={() => console.log('Pressed Left for Tasks-2')}
-              onRightPress={() => console.log('Pressed Right for Tasks-2')}
+              title="Tasks-1"
+              onLeftPress={() => navigation.navigate('TasksList')} // Навігація до Tasks-2
+              onRightPress={() => console.log('Pressed Right for Tasks-1')}
             />
           ),
-        }}
+        })}
       />
     </TaskStack.Navigator>
   );

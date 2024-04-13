@@ -1,5 +1,12 @@
 import React, {ReactNode} from 'react';
-import {Pressable, StyleProp, Text, View, ViewStyle} from 'react-native';
+import {
+  Pressable,
+  StyleProp,
+  Text,
+  View,
+  ViewStyle,
+  ImageBackground,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import PhotoIcoSvg from '../../assets/images/svg/PhotoIcoSvg.tsx';
 import styles from './styles';
@@ -17,6 +24,7 @@ interface IAvatarCircleProps {
   editable?: boolean;
   iconComponent?: ReactNode;
   onIconPress?: any;
+  textStyles?: object;
 }
 
 export const AvatarCircle = React.memo(
@@ -34,6 +42,7 @@ export const AvatarCircle = React.memo(
     editable = false,
     iconComponent,
     onIconPress = () => {},
+    textStyles = {},
   }: IAvatarCircleProps) => {
     return (
       <View>
@@ -47,9 +56,14 @@ export const AvatarCircle = React.memo(
             ...(containerStyles as Object),
           }}
           onPress={onPress}>
-          {defaultImage ? (
-            <Text style={{...styles.avatarText, fontSize: avatarNameSize}}>
-              {name && (name.length >= 2 ? name.slice(0, 2) : name[0])}
+          {defaultImage || (name && !url) ? (
+            <Text
+              style={{
+                ...styles.avatarText,
+                fontSize: avatarNameSize,
+                ...textStyles,
+              }}>
+              {name}
             </Text>
           ) : (
             <FastImage
@@ -64,6 +78,7 @@ export const AvatarCircle = React.memo(
                 priority: FastImage.priority.normal,
               }}
               resizeMode={FastImage.resizeMode.stretch}
+              // onError={e => console.log(e.nativeEvent.error)}
             />
           )}
           {editable ? (

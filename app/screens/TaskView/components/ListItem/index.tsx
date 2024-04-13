@@ -1,26 +1,15 @@
 import * as React from 'react';
 import {StyleSheet, Text, Pressable, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../../../../theme/useTheme';
 import Card from '../Card';
 import {ThemeContextInterface} from '../../../../theme/useTheme';
 import {AvatarCircle} from '../../../../components/AvatarCircle';
 import {extractDateTimePart} from '../../utils.ts';
-import Location from "../../../../assets/images/components/Location";
-
-interface TaskItemType {
-  id: string;
-  nameAvatarOne: string;
-  imageAvatarOne: string;
-  nameAvatarSecond: string;
-  imageAvatarSecond: string;
-  timeCreated: string;
-  location: string;
-  done: boolean;
-}
+import Location from '../../../../assets/images/components/Location';
+import {TaskType} from '../../../../store/tasksSlice.ts';
 
 interface ListItemType {
-  item: TaskItemType;
+  item: TaskType;
   index?: number;
   onPress: (arg0: string) => void;
 }
@@ -31,27 +20,25 @@ const ListItem = ({item, onPress}: ListItemType): JSX.Element => {
   return (
     <Card style={[styles.card]}>
       <Pressable
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={[{opacity: item.done ? 0.8 : 1}]}
-        accessibilityLabel={
-          item.done ? 'Tap to uncheck from list' : 'Tap to check from list'
-        }
+        // style={[{opacity: item.done ? 0.8 : 1}]}
+        // accessibilityLabel={
+        //   item.done ? 'Tap to uncheck from list' : 'Tap to check from list'
+        // }
         accessibilityHint="Toggles task done and undone"
         accessibilityRole="radio"
-        accessibilityState={{checked: item.done}}
+        // accessibilityState={{checked: item.done}}
         onPress={() => onPress(item.id)}>
         <View style={styles.containerItem}>
           <View style={styles.avatarContainer}>
             <AvatarCircle
-              url={item.imageAvatarOne}
+              url={item.avatarOne}
               size={50}
-              defaultImage={true}
               borderWidth={2}
               name={' '}
               borderColor="rgba(110, 91, 125, 1)"
               containerStyles={styles.avatarStyles}
             />
-            <Text style={styles.avatarName}>{item.nameAvatarOne}</Text>
+            <Text style={styles.avatarName}>{item.teamNameOne}</Text>
           </View>
           <View>
             <View style={styles.timeContainer}>
@@ -69,21 +56,20 @@ const ListItem = ({item, onPress}: ListItemType): JSX.Element => {
               </Text>
             </View>
             <View style={styles.locationContainer}>
-              <Location/>
-              <Text style={styles.locationText}>{item.location}</Text>
+              <Location />
+              <Text style={styles.locationText}>{item.locationMatch}</Text>
             </View>
           </View>
           <View style={styles.avatarContainer}>
             <AvatarCircle
-              url={item.imageAvatarOne}
+              url={item.avatarSecond}
               size={50}
-              defaultImage={true}
               borderWidth={2}
               name={' '}
               borderColor="rgba(110, 91, 125, 1)"
               containerStyles={styles.avatarStyles}
             />
-            <Text style={styles.avatarName}>{item.nameAvatarOne}</Text>
+            <Text style={styles.avatarName}>{item.teamNameSecond}</Text>
           </View>
           <View />
         </View>
@@ -99,11 +85,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#4D5265',
   },
-  // row: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  // },
   title: {
     fontSize: 14,
     fontWeight: '600',
@@ -113,7 +94,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // backgroundColor: 'green',
   },
   avatarContainer: {
     flex: 1,
