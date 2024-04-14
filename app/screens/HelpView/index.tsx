@@ -1,5 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
+import ArrowDown from "../../assets/images/components/ArrowDown.tsx";
+import ArrowLeft from "../../assets/images/components/ArrowLeft.tsx";
 
 const ExpandableListItem = ({title, children}) => {
   const [expanded, setExpanded] = useState(false);
@@ -19,6 +21,11 @@ const ExpandableListItem = ({title, children}) => {
   const bodyHeight = animationController.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 100], // Adjust this value to the height of the content
+  });
+
+  const arrowTransform = animationController.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '-90deg'], // Rotates the arrow
   });
 
   return (
