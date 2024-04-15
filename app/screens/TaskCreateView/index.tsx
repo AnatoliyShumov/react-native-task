@@ -7,6 +7,7 @@ import {
   Platform,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
@@ -35,7 +36,13 @@ const TaskCreate = () => {
 
   const handleOnSubmit = values => {
     if (values) {
-      dispatch(taskAdded({...values, id: uuid.v4(), timeCreated: '03:45 AM, Sat, Jan 6, 2024'}));
+      dispatch(
+        taskAdded({
+          ...values,
+          id: uuid.v4(),
+          timeCreated: '03:45 AM, Sat, Jan 6, 2024',
+        }),
+      );
       console.log(values);
     }
   };
@@ -68,158 +75,167 @@ const TaskCreate = () => {
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
-            <Text style={styles.titleGame}>Add Game</Text>
-            <View style={styles.imageWrapper}>
-              <View style={styles.imageInner}>
-                <Text style={styles.titleImage}>Team 1</Text>
-                <CameraView
-                  handleChoiseUrlImage={handleChange('avatarOne')}
-                  avatarName={'Edit'}
-                  containerStyles={{backgroundColor: '#DADADA'}}
-                  textStyles={{
-                    fontSizes: 16,
-                    color: '#FE734C',
-                    fontWeight: 700,
-                  }}
-                  size={100}
-                />
-                {touched.avatarOne && errors.avatarOne && (
-                  <Text style={styles.errorText}>{errors.avatarOne}</Text>
-                )}
+            <ScrollView
+              style={styles.formContainer}
+              contentContainerStyle={styles.contentContainer}>
+              <Text style={styles.titleGame}>Add Game</Text>
+              <View style={styles.imageWrapper}>
+                <View style={styles.imageInner}>
+                  <Text style={styles.titleImage}>Team 1</Text>
+                  <CameraView
+                    handleChoiseUrlImage={handleChange('avatarOne')}
+                    avatarName={'Edit'}
+                    containerStyles={{backgroundColor: '#DADADA'}}
+                    textStyles={{
+                      fontSizes: 16,
+                      color: '#FE734C',
+                      fontWeight: 700,
+                    }}
+                    size={100}
+                  />
+                  {touched.avatarOne && errors.avatarOne && (
+                    <Text style={styles.errorText}>{errors.avatarOne}</Text>
+                  )}
+                </View>
+                <VsImage />
+                <View style={styles.imageInner}>
+                  <Text style={styles.titleImage}>Team 2</Text>
+                  <CameraView
+                    handleChoiseUrlImage={handleChange('avatarSecond')}
+                    avatarName={'Edit'}
+                    containerStyles={{backgroundColor: '#DADADA'}}
+                    textStyles={{
+                      fontSizes: 16,
+                      color: '#FE734C',
+                      fontWeight: 700,
+                    }}
+                    size={100}
+                  />
+                  {touched.avatarSecond && errors.avatarSecond && (
+                    <Text style={styles.errorText}>{errors.avatarSecond}</Text>
+                  )}
+                </View>
               </View>
-              <VsImage />
-              <View style={styles.imageInner}>
-                <Text style={styles.titleImage}>Team 2</Text>
-                <CameraView
-                  handleChoiseUrlImage={handleChange('avatarSecond')}
-                  avatarName={'Edit'}
-                  containerStyles={{backgroundColor: '#DADADA'}}
-                  textStyles={{
-                    fontSizes: 16,
-                    color: '#FE734C',
-                    fontWeight: 700,
-                  }}
-                  size={100}
-                />
-                {touched.avatarSecond && errors.avatarSecond && (
-                  <Text style={styles.errorText}>{errors.avatarSecond}</Text>
-                )}
+              <View style={styles.inputRow}>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={[
+                      styles.input,
+                      touched.teamNameOne && errors.teamNameOne
+                        ? styles.inputError
+                        : null,
+                    ]}
+                    onChangeText={handleChange('teamNameOne')}
+                    onBlur={handleBlur('teamNameOne')}
+                    value={values.teamNameOne}
+                    placeholder="Team name"
+                    placeholderTextColor="#FFFFFF90"
+                  />
+                  {touched.teamNameOne && errors.teamNameOne && (
+                    <Text style={styles.errorText}>{errors.teamNameOne}</Text>
+                  )}
+                </View>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={[
+                      styles.input,
+                      styles.inputRowTextEnd,
+                      touched.teamNameSecond && errors.teamNameSecond
+                        ? styles.inputError
+                        : null,
+                    ]}
+                    onChangeText={handleChange('teamNameSecond')}
+                    onBlur={handleBlur('teamNameSecond')}
+                    value={values.teamNameSecond}
+                    placeholder="Team name"
+                    placeholderTextColor="#FFFFFF90"
+                  />
+                  {touched.teamNameSecond && errors.teamNameSecond && (
+                    <Text style={styles.errorText}>
+                      {errors.teamNameSecond}
+                    </Text>
+                  )}
+                </View>
               </View>
-            </View>
-            <View style={styles.inputRow}>
-              <View style={styles.inputContainer}>
+              <View style={styles.inputRow}>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={[
+                      styles.input,
+                      touched.teamGoalOne && errors.teamGoalOne
+                        ? styles.inputError
+                        : null,
+                    ]}
+                    onChangeText={handleChange('teamGoalOne')}
+                    onBlur={handleBlur('teamGoalOne')}
+                    value={values.teamGoalOne}
+                    placeholder="Team goal"
+                    placeholderTextColor="#FFFFFF90"
+                  />
+                  {touched.teamGoalOne && errors.teamGoalOne && (
+                    <Text style={styles.errorText}>{errors.teamGoalOne}</Text>
+                  )}
+                </View>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={[
+                      styles.input,
+                      styles.inputRowTextEnd,
+                      touched.teamGoalSecond && errors.teamGoalSecond
+                        ? styles.inputError
+                        : null,
+                    ]}
+                    onChangeText={handleChange('teamGoalSecond')}
+                    onBlur={handleBlur('teamGoalSecond')}
+                    value={values.teamGoalSecond}
+                    placeholder="Team goal"
+                    placeholderTextColor="#FFFFFF90"
+                  />
+                  {touched.teamGoalSecond && errors.teamGoalSecond && (
+                    <Text style={styles.errorText}>
+                      {errors.teamGoalSecond}
+                    </Text>
+                  )}
+                </View>
+              </View>
+              <View style={styles.inputContainerWide}>
                 <TextInput
                   style={[
-                    styles.input,
-                    touched.teamNameOne && errors.teamNameOne
+                    styles.inputWide,
+                    touched.dataMatch && errors.dataMatch
                       ? styles.inputError
                       : null,
                   ]}
-                  onChangeText={handleChange('teamNameOne')}
-                  onBlur={handleBlur('teamNameOne')}
-                  value={values.teamNameOne}
-                  placeholder="Team name"
+                  onChangeText={handleChange('dataMatch')}
+                  onBlur={handleBlur('dataMatch')}
+                  value={values.dataMatch}
+                  placeholder="Data match"
                   placeholderTextColor="#FFFFFF90"
                 />
-                {touched.teamNameOne && errors.teamNameOne && (
-                  <Text style={styles.errorText}>{errors.teamNameOne}</Text>
+                {touched.dataMatch && errors.dataMatch && (
+                  <Text style={styles.errorText}>{errors.dataMatch}</Text>
                 )}
               </View>
-              <View style={styles.inputContainer}>
+              <View style={styles.inputContainerWide}>
                 <TextInput
                   style={[
-                    styles.input,
-                    styles.inputRowTextEnd,
-                    touched.teamNameSecond && errors.teamNameSecond
+                    styles.inputWide,
+                    touched.locationMatch && errors.locationMatch
                       ? styles.inputError
                       : null,
                   ]}
-                  onChangeText={handleChange('teamNameSecond')}
-                  onBlur={handleBlur('teamNameSecond')}
-                  value={values.teamNameSecond}
-                  placeholder="Team name"
+                  onChangeText={handleChange('locationMatch')}
+                  onBlur={handleBlur('locationMatch')}
+                  value={values.locationMatch}
+                  placeholder="Location match"
                   placeholderTextColor="#FFFFFF90"
                 />
-                {touched.teamNameSecond && errors.teamNameSecond && (
-                  <Text style={styles.errorText}>{errors.teamNameSecond}</Text>
+                {touched.locationMatch && errors.locationMatch && (
+                  <Text style={styles.errorText}>{errors.locationMatch}</Text>
                 )}
               </View>
-            </View>
-            <View style={styles.inputRow}>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={[
-                    styles.input,
-                    touched.teamGoalOne && errors.teamGoalOne
-                      ? styles.inputError
-                      : null,
-                  ]}
-                  onChangeText={handleChange('teamGoalOne')}
-                  onBlur={handleBlur('teamGoalOne')}
-                  value={values.teamGoalOne}
-                  placeholder="Team goal"
-                  placeholderTextColor="#FFFFFF90"
-                />
-                {touched.teamGoalOne && errors.teamGoalOne && (
-                  <Text style={styles.errorText}>{errors.teamGoalOne}</Text>
-                )}
-              </View>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={[
-                    styles.input,
-                    styles.inputRowTextEnd,
-                    touched.teamGoalSecond && errors.teamGoalSecond
-                      ? styles.inputError
-                      : null,
-                  ]}
-                  onChangeText={handleChange('teamGoalSecond')}
-                  onBlur={handleBlur('teamGoalSecond')}
-                  value={values.teamGoalSecond}
-                  placeholder="Team goal"
-                  placeholderTextColor="#FFFFFF90"
-                />
-                {touched.teamGoalSecond && errors.teamGoalSecond && (
-                  <Text style={styles.errorText}>{errors.teamGoalSecond}</Text>
-                )}
-              </View>
-            </View>
-            <View style={styles.inputContainerWide}>
-              <TextInput
-                style={[
-                  styles.inputWide,
-                  touched.dataMatch && errors.dataMatch
-                    ? styles.inputError
-                    : null,
-                ]}
-                onChangeText={handleChange('dataMatch')}
-                onBlur={handleBlur('dataMatch')}
-                value={values.dataMatch}
-                placeholder="Data match"
-                placeholderTextColor="#FFFFFF90"
-              />
-              {touched.dataMatch && errors.dataMatch && (
-                <Text style={styles.errorText}>{errors.dataMatch}</Text>
-              )}
-            </View>
-            <View style={styles.inputContainerWide}>
-              <TextInput
-                style={[
-                  styles.inputWide,
-                  touched.locationMatch && errors.locationMatch
-                    ? styles.inputError
-                    : null,
-                ]}
-                onChangeText={handleChange('locationMatch')}
-                onBlur={handleBlur('locationMatch')}
-                value={values.locationMatch}
-                placeholder="Location match"
-                placeholderTextColor="#FFFFFF90"
-              />
-              {touched.locationMatch && errors.locationMatch && (
-                <Text style={styles.errorText}>{errors.locationMatch}</Text>
-              )}
-            </View>
+            </ScrollView>
+
             <TouchableOpacity onPress={handleSubmit} style={styles.addButton}>
               <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
@@ -233,10 +249,19 @@ const TaskCreate = () => {
 export default TaskCreate;
 
 const styles = StyleSheet.create({
-  container: {
+  keyboardView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '100%',
+  },
+  formContainer: {
+    flex: 1,
+    width: '100%',
+  },
+  contentContainer: {
+    paddingBottom: 70, // Add padding to ensure the scroll view content is not obscured by the absolute button
+  },
+  container: {
+
   },
   inputRow: {
     flexDirection: 'row',

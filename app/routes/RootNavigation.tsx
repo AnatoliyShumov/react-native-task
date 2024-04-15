@@ -84,12 +84,12 @@ const TaskStackScreen = () => {
     <TaskStack.Navigator>
       <TaskStack.Screen
         name="TasksList"
-        component={SettingView}
+        component={TaskCreateView}
         options={({navigation}) => ({
           headerShown: true,
           header: () => (
             <Header
-              title="Tasks-1"
+              title=""
               onLeftPress={() => navigation.navigate('TasksList')} // Навігація до Tasks-2
               onRightPress={() => console.log('Pressed Right for Tasks-1')}
             />
