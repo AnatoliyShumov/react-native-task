@@ -31,6 +31,7 @@ import {updateToken} from '../store/userSlice';
 // import Login from '../screens/auth/Login';
 import Tasks from '../screens/TaskView';
 import TaskCreateView from '../screens/TaskCreateView';
+import CreateTaskDone from '../screens/CreateTaskDone';
 import ReservationView from '../screens/ReservationView';
 import NetworkExample from '../screens/NetworkExample';
 import HelpView from '../screens/HelpView';
@@ -84,16 +85,10 @@ const TaskStackScreen = () => {
     <TaskStack.Navigator>
       <TaskStack.Screen
         name="TasksList"
-        component={TaskCreateView}
+        component={Tasks}
         options={({navigation}) => ({
           headerShown: true,
-          header: () => (
-            <Header
-              title=""
-              onLeftPress={() => navigation.navigate('TasksList')} // Навігація до Tasks-2
-              onRightPress={() => console.log('Pressed Right for Tasks-1')}
-            />
-          ),
+          header: () => <Header />,
         })}
       />
       <TaskStack.Screen
@@ -101,13 +96,23 @@ const TaskStackScreen = () => {
         component={TaskCreateView}
         options={({navigation}) => ({
           headerShown: true,
-          header: () => (
-            <Header
-              title="Tasks-1"
-              onLeftPress={() => navigation.navigate('TasksList')} // Навігація до Tasks-2
-              onRightPress={() => console.log('Pressed Right for Tasks-1')}
-            />
-          ),
+          header: () => <Header />,
+        })}
+      />
+      <TaskStack.Screen
+        name="CreateTaskDone"
+        component={CreateTaskDone}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+      <TaskStack.Screen
+        name="Settings"
+        component={SettingView}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
         })}
       />
     </TaskStack.Navigator>

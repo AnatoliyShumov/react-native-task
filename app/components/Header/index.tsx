@@ -12,17 +12,23 @@ import {AvatarCircle} from '../AvatarCircle';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store.ts';
 import RocketYellow from '../../assets/images/components/RocketYellow.tsx';
+import {useNavigation} from '@react-navigation/native';
 
-const CustomHeader = ({title, onLeftPress, onRightPress}) => {
+const CustomHeader = ({
+  title = '',
+  onLeftPress = () => {},
+  onRightPress = () => {},
+}) => {
   const userData = useSelector((state: RootState) => state.user);
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={onLeftPress}>
+        <TouchableOpacity onPress={() => navigation.navigate('TasksList')}>
           <RocketYellow />
         </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity onPress={onRightPress}>
+        <TouchableOpacity>
           <AvatarCircle
             url={userData.avatarUser}
             size={45}
@@ -30,6 +36,8 @@ const CustomHeader = ({title, onLeftPress, onRightPress}) => {
             borderWidth={2}
             name={''}
             borderColor="rgba(110, 91, 125, 1)"
+            containerStyles={{backgroundColor: '#DADADA'}}
+            onPress={() => navigation.navigate('Settings')}
           />
         </TouchableOpacity>
       </View>
@@ -57,6 +65,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  imageContainer: {
+    width: 45,
+    height: 45,
   },
 });
 

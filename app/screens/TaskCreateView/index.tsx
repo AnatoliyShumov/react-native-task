@@ -19,6 +19,7 @@ import CameraView from '../../components/CameraPicker';
 import VsImage from '../../assets/images/components/Vs.tsx';
 import * as yup from 'yup';
 import uuid from 'react-native-uuid';
+import {useNavigation} from '@react-navigation/native';
 
 const validationSchema = yup.object().shape({
   avatarOne: yup.string().min(1, 'Іs required'),
@@ -33,6 +34,7 @@ const validationSchema = yup.object().shape({
 
 const TaskCreate = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const handleOnSubmit = values => {
     if (values) {
@@ -42,6 +44,7 @@ const TaskCreate = () => {
           id: uuid.v4(),
           timeCreated: '03:45 AM, Sat, Jan 6, 2024',
         }),
+        navigation.navigate('CreateTaskDone'),
       );
       console.log(values);
     }
@@ -258,10 +261,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    paddingBottom: 70, // Add padding to ensure the scroll view content is not obscured by the absolute button
+    paddingBottom: 70,
+    alignItems: 'center',
   },
   container: {
-
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   inputRow: {
     flexDirection: 'row',
