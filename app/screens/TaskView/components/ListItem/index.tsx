@@ -146,5 +146,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'white',
     paddingLeft: 5,
+    minWidth: 140,
   },
 });
