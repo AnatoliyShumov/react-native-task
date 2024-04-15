@@ -137,6 +137,7 @@ const SettingView = () => {
                 value={values.password}
                 placeholder="Password"
                 placeholderTextColor="#FFFFFF90"
+                secureTextEntry={true}
               />
               {touched.username && errors.username && (
                 <Text style={styles.errorText}>{errors.username}</Text>

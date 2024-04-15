@@ -11,7 +11,7 @@ const Layout = ({children, style}: LayoutPropsType) => {
   return (
     <SafeAreaView
       edges={['left', 'right', 'bottom']}
-      style={[styles.container, {backgroundColor: 'white'}]}>
+      style={[styles.container]}>
       {/*<StatusBar*/}
       {/*  animated*/}
       {/*  backgroundColor={theme.cardBg}*/}
@@ -29,7 +29,7 @@ const Layout = ({children, style}: LayoutPropsType) => {
 export default Layout;
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, backgroundColor: '#4D5265'},
   layout: {
     flex: 1,
     backgroundColor: 'green',
