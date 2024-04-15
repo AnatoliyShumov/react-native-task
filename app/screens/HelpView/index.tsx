@@ -1,7 +1,15 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
-import ArrowDown from "../../assets/images/components/ArrowDown.tsx";
-import ArrowLeft from "../../assets/images/components/ArrowLeft.tsx";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import ArrowDown from '../../assets/images/components/ArrowDown.tsx';
+import ArrowLeft from '../../assets/images/components/ArrowLeft.tsx';
+import Layout from '../../components/Layout.tsx';
 
 const ExpandableListItem = ({title, children}) => {
   const [expanded, setExpanded] = useState(false);
@@ -23,15 +31,11 @@ const ExpandableListItem = ({title, children}) => {
     outputRange: [0, 100], // Adjust this value to the height of the content
   });
 
-  const arrowTransform = animationController.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '-90deg'], // Rotates the arrow
-  });
-
   return (
     <View style={styles.itemContainer}>
       <TouchableOpacity onPress={toggleItem} style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
+        {expanded ? <ArrowDown /> : <ArrowLeft />}
       </TouchableOpacity>
       <Animated.View style={[styles.bodyContainer, {height: bodyHeight}]}>
         {expanded && (
@@ -47,7 +51,48 @@ const ExpandableListItem = ({title, children}) => {
   );
 };
 
+// Usage within your main component
+const YourMainComponent = () => {
+  return (
+    <Layout>
+      <Text style={styles.titleGame}>All Match</Text>
+      <ScrollView style={styles.container}>
+        <ExpandableListItem title="The table broke">
+          If your table has broken during a match, please contact support.
+        </ExpandableListItem>
+        <ExpandableListItem title="The net fell">
+          For issues with the net, please review the setup instructions.
+        </ExpandableListItem>
+        <ExpandableListItem title="The rubber band came off the racket">
+          Make sure to secure the rubber band properly before the game starts.
+        </ExpandableListItem>
+        <ExpandableListItem title="The ball cracked">
+          A cracked ball cannot be used in official games. Replace it
+          immediately.
+        </ExpandableListItem>
+        <ExpandableListItem title="Call the judge">
+          If you need to dispute a play or call, contact the judge on the floor.
+        </ExpandableListItem>
+        {/* Add more items as needed */}
+      </ScrollView>
+    </Layout>
+  );
+};
+
+export default YourMainComponent;
+
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15,
+  },
+  titleGame: {
+    fontSize: 36,
+    fontWeight: '700',
+    color: 'white',
+    marginTop: 30,
+    alignSelf: 'center',
+    marginBottom: 15,
+  },
   itemContainer: {
     backgroundColor: '#4F4F4F', // Dark gray color, adjust as needed
     overflow: 'hidden',
@@ -55,6 +100,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   titleContainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     paddingHorizontal: 15,
     paddingVertical: 20,
     borderTopLeftRadius: 10,
@@ -84,22 +131,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
-// Usage within your main component
-const YourMainComponent = () => {
-  return (
-    <View style={{flex: 1, padding: 20, backgroundColor: '#2B2B2B'}}>
-
-      {/* Dark background */}
-      <ExpandableListItem title="The table broke">
-        If your table has broken during a match, please contact support.
-      </ExpandableListItem>
-      <ExpandableListItem title="The net fell">
-        For issues with the net, please review the setup instructions.
-      </ExpandableListItem>
-      {/* Add more list items as needed */}
-    </View>
-  );
-};
 
 export default YourMainComponent;
