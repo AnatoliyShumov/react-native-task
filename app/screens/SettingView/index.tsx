@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -15,9 +15,12 @@ import {RootState} from '../../store/store';
 import Layout from '../../components/Layout.tsx';
 import CameraView from '../../components/CameraPicker';
 import {updateUser} from '../../store/userSlice';
+import {ModalComponent} from '../../components/ModalComponent';
 
 const SettingView = () => {
+  const [isVisibleModal, setVisibleModal] = useState<boolean>(false);
   const dispatch = useDispatch();
+
   const handleOnSubmit = values => {
     if (values) {
       dispatch(updateUser({...values}));
@@ -25,6 +28,34 @@ const SettingView = () => {
   };
 
   const userData = useSelector((state: RootState) => state.user);
+
+  const handleCloseModal = values => {
+    setVisibleModal(false);
+  };
+  const renderContent = () => {
+    return (
+      <View>
+        <Text style={styles.titleGame}>Status</Text>
+        <View style={styles.rowStatus}>
+          <Text style={styles.textStatus}>Win</Text>
+          <Text style={styles.textNumber}>1</Text>
+        </View>
+        <View style={styles.rowStatus}>
+          <Text style={styles.textStatus}>Draw</Text>
+          <Text style={styles.textNumber}>2</Text>
+        </View>
+        <View style={styles.rowStatus}>
+          <Text style={styles.textStatus}>Losses</Text>
+          <Text style={styles.textNumber}>3</Text>
+        </View>
+        <TouchableOpacity
+          onPress={handleCloseModal}
+          style={[styles.addButton, styles.exitModalButton]}>
+          <Text style={styles.addButtonText}>Exit</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <Layout>
@@ -51,6 +82,17 @@ const SettingView = () => {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
             <View style={styles.photoWrapper}>
+              <ModalComponent
+                minHeigth={'40%'}
+                headerText={''}
+                modalVisible={isVisibleModal}
+                setModalVisible={setVisibleModal}
+                withBlur
+                maxHeigth={'80%'}
+                backdropOpacity={0.5}
+                withLine={false}>
+                {renderContent()}
+              </ModalComponent>
               <CameraView
                 handleChoiseUrlImage={handleChange('avatarUser')}
                 avatarName={'Edit'}
@@ -102,7 +144,7 @@ const SettingView = () => {
             </View>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
-                onPress={handleSubmit}
+                onPress={() => setVisibleModal(true)}
                 style={[styles.addButton, styles.statusButton]}>
                 <Text style={styles.addButtonText}>Status</Text>
               </TouchableOpacity>
@@ -179,5 +221,25 @@ const styles = StyleSheet.create({
   },
   photoWrapper: {
     marginBottom: 20,
+  },
+
+  rowStatus: {
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 15,
+  },
+  textStatus: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  textNumber: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FE734C',
+  },
+  exitModalButton: {
+    marginTop: 30,
   },
 });
