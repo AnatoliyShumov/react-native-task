@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
-  blacklist: ['user', 'todos'],
+  blacklist: ['todos'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

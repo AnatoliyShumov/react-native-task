@@ -11,6 +11,7 @@ interface UserScreenProps {
   avatarName?: string;
   containerStyles?: object;
   textStyles?: object;
+  avatarUrl?: string;
 }
 const UserScreen: React.FC<UserScreenProps> = ({
   handleChoiseUrlImage = () => {},
@@ -18,6 +19,7 @@ const UserScreen: React.FC<UserScreenProps> = ({
   avatarName = '',
   containerStyles = {},
   textStyles = {},
+  avatarUrl = '',
 }) => {
   const [pickerResponse, setPickerResponse] = useState(null);
   const [visible, setVisible] = useState(false);
@@ -57,7 +59,7 @@ const UserScreen: React.FC<UserScreenProps> = ({
     <>
       {/*<ImagePickerHeader />*/}
       <AvatarCircle
-        url={uri}
+        url={uri || avatarUrl}
         size={size}
         defaultImage={false}
         borderWidth={2}

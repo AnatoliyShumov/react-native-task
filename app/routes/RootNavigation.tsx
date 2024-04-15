@@ -35,6 +35,7 @@ import ReservationView from '../screens/ReservationView';
 import NetworkExample from '../screens/NetworkExample';
 import HelpView from '../screens/HelpView';
 import Settings from '../screens/Settings';
+import SettingView from '../screens/SettingView';
 import TableView from '../screens/TableView';
 import Header from '../components/Header';
 
@@ -83,7 +84,7 @@ const TaskStackScreen = () => {
     <TaskStack.Navigator>
       <TaskStack.Screen
         name="TasksList"
-        component={TableView}
+        component={SettingView}
         options={({navigation}) => ({
           headerShown: true,
           header: () => (
