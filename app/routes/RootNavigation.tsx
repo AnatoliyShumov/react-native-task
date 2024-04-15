@@ -256,7 +256,6 @@ export default function RootNavigation() {
           name="Help"
           component={HelpStackScreen}
           options={{
-            headerShown: true,
             tabBarIcon: helpIcon,
           }}
         />
