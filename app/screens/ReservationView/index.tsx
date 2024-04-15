@@ -44,7 +44,7 @@ const Reservation = () => {
   const onCheckedHandler = (id: string) => {};
   const addNewTask = () => {
     // @ts-ignore
-    navigation.navigate('TasksCreate');
+    navigation.navigate('ReservationDone');
   };
   const keyExtractor = (item: Task) => `task-${item.id}`;
   return (

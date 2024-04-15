@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  Button,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
-import {useSelector} from 'react-redux';
-
-import {RootState} from '../../store/store';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Layout from '../../components/Layout.tsx';
 import Done from '../../assets/images/components/Done.tsx';
 import {useNavigation} from '@react-navigation/native';
@@ -18,7 +8,7 @@ const TaskCreate = () => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('TasksList');
+    navigation.navigate('HelpView');
   };
 
   return (
@@ -27,7 +17,7 @@ const TaskCreate = () => {
       <View style={styles.centerContainer}>
         <Done />
         <Text style={styles.titleGame}>Done</Text>
-        <Text style={styles.titleGame}>Add match</Text>
+        <Text style={styles.titleGame}>Call the trainer</Text>
       </View>
       <TouchableOpacity onPress={handlePress} style={styles.addButton}>
         <Text style={styles.addButtonText}>Back</Text>

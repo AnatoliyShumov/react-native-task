@@ -18,7 +18,7 @@ const TaskCreate = () => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('TasksList');
+    navigation.navigate('ReservationView');
   };
 
   return (
@@ -27,7 +27,7 @@ const TaskCreate = () => {
       <View style={styles.centerContainer}>
         <Done />
         <Text style={styles.titleGame}>Done</Text>
-        <Text style={styles.titleGame}>Add match</Text>
+        <Text style={styles.titleGame}>Reservation</Text>
       </View>
       <TouchableOpacity onPress={handlePress} style={styles.addButton}>
         <Text style={styles.addButtonText}>Back</Text>

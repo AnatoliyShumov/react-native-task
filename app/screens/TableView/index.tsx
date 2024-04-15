@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Text,
   View,
@@ -16,16 +16,13 @@ import Swiper from 'react-native-swiper';
 import {swiperData} from './utils.ts';
 import SwipperLeft from '../../assets/images/components/SwipperLeft.tsx';
 import SwipperRigth from '../../assets/images/components/SwipperRigth.tsx';
+import {useNavigation} from '@react-navigation/native';
 
 const TaskCreate = () => {
   const [ballAnimation] = useState(new Animated.Value(0)); // Initial value for ball position
   const ballOpacity = useRef(new Animated.Value(0)).current;
   const [isModalVisible, setModalVisible] = useState(false);
-
-  const addNewTask = () => {
-    // @ts-ignore
-    // navigation.navigate('TasksCreate');
-  };
+  const navigation = useNavigation();
   const handleTablePress = () => {
     // Reset the ball position
     ballAnimation.setValue(0);
@@ -53,6 +50,11 @@ const TaskCreate = () => {
       }),
     ]).start();
     setTimeout(() => setModalVisible(true), 1500);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(!isModalVisible);
+    setTimeout(() => navigation.navigate('TableDone'), 300);
   };
 
   return (
@@ -84,7 +86,7 @@ const TaskCreate = () => {
               </Swiper>
               <TouchableOpacity
                 style={styles.closeButton}
-                onPress={() => setModalVisible(!isModalVisible)}>
+                onPress={handleCloseModal}>
                 <Text style={styles.closeButtonText}>Done</Text>
               </TouchableOpacity>
             </View>

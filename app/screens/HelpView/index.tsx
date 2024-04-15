@@ -10,10 +10,12 @@ import {
 import ArrowDown from '../../assets/images/components/ArrowDown.tsx';
 import ArrowLeft from '../../assets/images/components/ArrowLeft.tsx';
 import Layout from '../../components/Layout.tsx';
+import {useNavigation} from '@react-navigation/native';
 
 const ExpandableListItem = ({title, children}) => {
   const [expanded, setExpanded] = useState(false);
   const animationController = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
 
   const toggleItem = () => {
     const finalValue = expanded ? 0 : 1;
@@ -41,7 +43,9 @@ const ExpandableListItem = ({title, children}) => {
         {expanded && (
           <View>
             <Text style={styles.bodyText}>{children}</Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('HelpDone')}>
               <Text style={styles.buttonText}>Support</Text>
             </TouchableOpacity>
           </View>

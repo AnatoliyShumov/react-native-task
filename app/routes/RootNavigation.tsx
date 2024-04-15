@@ -16,6 +16,7 @@ import Home from '../assets/images/components/Home';
 import Reservation from '../assets/images/components/Reservation';
 import Table from '../assets/images/components/Table';
 import Help from '../assets/images/components/Help';
+import HelpDone from "../screens/HelpDone";
 // import {useSelector, useDispatch} from 'react-redux';
 
 // Hook for theme change (Light/Dark Mode)
@@ -33,11 +34,13 @@ import Tasks from '../screens/TaskView';
 import TaskCreateView from '../screens/TaskCreateView';
 import CreateTaskDone from '../screens/CreateTaskDone';
 import ReservationView from '../screens/ReservationView';
+import ReservationDone from '../screens/ReservationDone';
+import TableView from '../screens/TableView';
+import TableGoal from '../screens/TableGoal';
 import NetworkExample from '../screens/NetworkExample';
 import HelpView from '../screens/HelpView';
 import Settings from '../screens/Settings';
 import SettingView from '../screens/SettingView';
-import TableView from '../screens/TableView';
 import Header from '../components/Header';
 
 // Icons for Bottom Tab Navigation
@@ -119,6 +122,81 @@ const TaskStackScreen = () => {
   );
 };
 
+const ReservationStack = createStackNavigator();
+
+const ReservationStackScreen = () => {
+  return (
+    <ReservationStack.Navigator>
+      <ReservationStack.Screen
+        name="ReservationView"
+        component={ReservationView}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+      <ReservationStack.Screen
+        name="ReservationDone"
+        component={ReservationDone}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+    </ReservationStack.Navigator>
+  );
+};
+
+const TableStack = createStackNavigator();
+
+const TableStackScreen = () => {
+  return (
+    <TableStack.Navigator>
+      <TableStack.Screen
+        name="TableView"
+        component={TableView}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+      <TableStack.Screen
+        name="TableDone"
+        component={TableGoal}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+    </TableStack.Navigator>
+  );
+};
+
+const HelpStack = createStackNavigator();
+
+const HelpStackScreen = () => {
+  return (
+    <HelpStack.Navigator>
+      <HelpStack.Screen
+        name="HelpView"
+        component={HelpView}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+      <HelpStack.Screen
+        name="HelpDone"
+        component={HelpDone}
+        options={({navigation}) => ({
+          headerShown: true,
+          header: () => <Header />,
+        })}
+      />
+    </HelpStack.Navigator>
+  );
+};
+
 export default function RootNavigation() {
   const {theme} = useTheme();
   const dispatch = useDispatch();
@@ -161,47 +239,24 @@ export default function RootNavigation() {
           }}
         />
         <Tab.Screen
-          name="NetworkExample"
-          component={NetworkExample}
+          name="Reservation"
+          component={ReservationStackScreen}
           options={{
-            headerShown: true,
-            header: () => (
-              <Header
-                title=""
-                onLeftPress={() => console.log('Pressed Left')}
-                onRightPress={() => console.log('Pressed Right')}
-              />
-            ),
             tabBarIcon: reservationIcon,
           }}
         />
         <Tab.Screen
-          name="Settings"
-          component={Settings}
+          name="Table"
+          component={TableStackScreen}
           options={{
-            headerShown: true,
-            header: () => (
-              <Header
-                title=""
-                onLeftPress={() => console.log('Pressed Left')}
-                onRightPress={() => console.log('Pressed Right')}
-              />
-            ),
             tabBarIcon: tableIcon,
           }}
         />
         <Tab.Screen
-          name="Settings2"
-          component={Settings}
+          name="Help"
+          component={HelpStackScreen}
           options={{
             headerShown: true,
-            header: () => (
-              <Header
-                title=""
-                onLeftPress={() => console.log('Pressed Left')}
-                onRightPress={() => console.log('Pressed Right')}
-              />
-            ),
             tabBarIcon: helpIcon,
           }}
         />
