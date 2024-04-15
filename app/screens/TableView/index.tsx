@@ -6,19 +6,21 @@ import {
   Image,
   TouchableOpacity,
   Animated,
+  Modal,
 } from 'react-native';
 
 import Layout from '../../components/Layout.tsx';
-import {ModalComponent} from '../../components/ModalComponent';
 
 import TableImage from '../../assets/images/img.png';
 import Swiper from 'react-native-swiper';
 import {swiperData} from './utils.ts';
+import SwipperLeft from '../../assets/images/components/SwipperLeft.tsx';
+import SwipperRigth from '../../assets/images/components/SwipperRigth.tsx';
 
 const TaskCreate = () => {
   const [ballAnimation] = useState(new Animated.Value(0)); // Initial value for ball position
   const ballOpacity = useRef(new Animated.Value(0)).current;
-  const [visible, setModalVisible] = useState<boolean>(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const addNewTask = () => {
     // @ts-ignore
@@ -50,38 +52,46 @@ const TaskCreate = () => {
         useNativeDriver: true,
       }),
     ]).start();
+    setTimeout(() => setModalVisible(true), 1500);
   };
-
-  const renderContentModal = useCallback(() => {
-    return (
-      <View>
-        <Text style={styles.titleGame}>Impact Radius</Text>
-        <Swiper
-          style={styles.wrapperSwiper}
-          showsButtons
-          loop={false}
-          showsPagination={false}>
-          {swiperData.map((element, index) => (
-            <View key={index} testID={element + 2} style={styles.slide1}>
-              <Text style={styles.swipperText}>{element}</Text>
-            </View>
-          ))}
-        </Swiper>
-      </View>
-    );
-  }, [swiperData]);
 
   return (
     <Layout>
       <Text style={styles.titleGame}>All Match</Text>
-      <ModalComponent
-        headerText={'Регистрация в турнире'}
-        modalVisible={visible}
-        setModalVisible={setModalVisible}
-        // children={}
-        minHeigth={'60%'}
-        withBlur
-      />
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isModalVisible}
+          onRequestClose={() => {
+            setModalVisible(!isModalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.titleGame}>Impact Radius</Text>
+              <Swiper
+                style={styles.wrapperSwiper}
+                showsButtons
+                loop={false}
+                showsPagination={false}
+                nextButton={<SwipperRigth />}
+                prevButton={<SwipperLeft />}>
+                {swiperData.map((element, index) => (
+                  <View key={index} testID={element + 2} style={styles.slide1}>
+                    <Text style={styles.swipperText}>{element}</Text>
+                  </View>
+                ))}
+              </Swiper>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setModalVisible(!isModalVisible)}>
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </View>
+
       <TouchableOpacity onPress={handleTablePress}>
         <View style={styles.imageContainer}>
           <Image
@@ -167,13 +177,84 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  wrapperSwiper: {
-    backgroundColor: 'red',
-    width: 100,
-    height: 100
-  },
+  wrapperSwiper: {},
   swipperText: {
-    fontSize: 16,
+    marginTop: 10,
+    fontSize: 48,
+    fontWeight: 'bold',
     color: 'white',
+  },
+
+  buttonText: {
+    fontSize: 50,
+    color: 'red', // Here you can set your desired color for the arrows
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalView: {
+    height: '60%',
+    margin: 20,
+    backgroundColor: '#4D5265',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+  },
+  openButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  closeButton: {
+    alignSelf: 'stretch',
+    backgroundColor: '#FF6347',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 15,
+  },
+  closeButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  swiper: {
+    height: 200, // Set the height for the swiper
+    width: '100%', // Set the width for the swiper
+    alignItems: 'center',
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
   },
 });
