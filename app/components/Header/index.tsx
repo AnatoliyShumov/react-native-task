@@ -22,9 +22,9 @@ const CustomHeader = ({
   const userData = useSelector((state: RootState) => state.user);
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('TasksList')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Table')}>
           <RocketYellow />
         </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
@@ -41,7 +41,7 @@ const CustomHeader = ({
           />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: '#292F3D', // Same as header background
     // For Android, make sure the status bar color matches
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   header: {
     flexDirection: 'row',
-    height: 90,
+    height: 110,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     overflow: 'hidden',
+    paddingTop: 40,
   },
   title: {
     fontSize: 20,
