@@ -49,7 +49,7 @@ const Reservation = () => {
   const keyExtractor = (item: Task) => `task-${item.id}`;
   return (
     <Layout>
-      <Text style={styles.titleGame}>All Match</Text>
+      <Text style={styles.titleGame}>Reservation</Text>
       <FlatList
         data={SliderData}
         renderItem={renderItem}
