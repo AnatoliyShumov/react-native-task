@@ -9,9 +9,7 @@ import {ThemeContextInterface} from '../theme/useTheme';
 const Layout = ({children, style}: LayoutPropsType) => {
   const {theme}: Partial<ThemeContextInterface> = useTheme();
   return (
-    <SafeAreaView
-      edges={['left', 'right', 'bottom']}
-      style={[styles.container]}>
+    <View edges={['left', 'right', 'bottom']} style={[styles.container]}>
       {/*<StatusBar*/}
       {/*  animated*/}
       {/*  backgroundColor={theme.cardBg}*/}
@@ -22,7 +20,7 @@ const Layout = ({children, style}: LayoutPropsType) => {
         style={[styles.layout, {backgroundColor: theme?.layoutBg}, style]}>
         {children}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

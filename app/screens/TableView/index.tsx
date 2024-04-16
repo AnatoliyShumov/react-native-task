@@ -59,8 +59,26 @@ const TaskCreate = () => {
 
   return (
     <Layout>
-      <Text style={styles.titleGame}>All Match</Text>
-      <View style={styles.centeredView}>
+      <Text style={styles.titleGame}>Table</Text>
+      <TouchableOpacity onPress={handleTablePress}>
+        <View style={styles.imageContainer}>
+          <Image
+            source={TableImage}
+            style={styles.tableImage}
+            resizeMode="cover"
+          />
+          <Animated.View
+            style={[
+              styles.ball,
+              {
+                transform: [{translateY: ballAnimation}],
+                opacity: ballOpacity,
+              },
+            ]}
+          />
+        </View>
+      </TouchableOpacity>
+      <View>
         <Modal
           animationType="fade"
           transparent={true}
@@ -93,25 +111,6 @@ const TaskCreate = () => {
           </View>
         </Modal>
       </View>
-
-      <TouchableOpacity onPress={handleTablePress}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={TableImage}
-            style={styles.tableImage}
-            resizeMode="cover"
-          />
-          <Animated.View
-            style={[
-              styles.ball,
-              {
-                transform: [{translateY: ballAnimation}],
-                opacity: ballOpacity,
-              },
-            ]}
-          />
-        </View>
-      </TouchableOpacity>
       <TouchableOpacity onPress={handleTablePress} style={styles.addButton}>
         <Text style={styles.addButtonText}>Drop</Text>
       </TouchableOpacity>
@@ -196,8 +195,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    // width: 0,
+    // height: 0,
+    // height: 0,
+    // position: "absolute"
   },
   modalView: {
     height: '60%',

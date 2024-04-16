@@ -1,24 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Layout from '../../components/Layout.tsx';
-import Done from '../../assets/images/components/Done.tsx';
+import Goal from '../../assets/images/components/Goal.tsx';
 import {useNavigation} from '@react-navigation/native';
 
 const TaskCreate = () => {
   const navigation = useNavigation();
 
+  const events = ['Goal', 'Miss', 'Save', 'Hit', 'Out'];
+
   const handlePress = () => {
     navigation.navigate('TableView');
   };
+
+  const getRandomEvent = () => {
+    const randomIndex = Math.floor(Math.random() * events.length);
+    return events[randomIndex];
+  };
+
+  const [currentEvent, setCurrentEvent] = useState(getRandomEvent);
+
+  useEffect(() => {
+    setCurrentEvent(getRandomEvent());
+  }, []);
 
   return (
     <Layout>
       {/* Tasks Listing starts here */}
       <View style={styles.centerContainer}>
-        <Done />
-        <Text style={styles.titleGame}>Done</Text>
-        <Text style={styles.titleGame}>Reservation</Text>
+        <Goal />
+        <Text style={styles.titleGame}>{currentEvent}</Text>
       </View>
       <TouchableOpacity onPress={handlePress} style={styles.addButton}>
         <Text style={styles.addButtonText}>Back</Text>

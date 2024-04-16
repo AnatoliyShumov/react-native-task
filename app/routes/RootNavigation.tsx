@@ -16,7 +16,7 @@ import Home from '../assets/images/components/Home';
 import Reservation from '../assets/images/components/Reservation';
 import Table from '../assets/images/components/Table';
 import Help from '../assets/images/components/Help';
-import HelpDone from "../screens/HelpDone";
+import HelpDone from '../screens/HelpDone';
 // import {useSelector, useDispatch} from 'react-redux';
 
 // Hook for theme change (Light/Dark Mode)
@@ -222,7 +222,8 @@ export default function RootNavigation() {
           tabBarStyle: {
             backgroundColor: theme.cardBg,
             borderTopColor: theme?.layoutBg,
-            height: 70,
+            height: 90,
+            borderTopWidth: 0,
           },
           tabBarInactiveTintColor: theme.color,
           tabBarActiveTintColor: theme.primary,
