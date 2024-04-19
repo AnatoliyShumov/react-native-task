@@ -1,6 +1,6 @@
 import {getSecureValue, setSecureValue} from './keyChain';
 import {login} from '../services/index';
-import {updateToken} from '../store/userSlice';
+import {updateToken} from '../store/userSlice-2.ts';
 import {store} from '../store/store';
 /**
  * Request ACCESS TOKEN using REFRESH TOKEN

@@ -3,14 +3,10 @@ import {persistStore, persistReducer} from 'redux-persist';
 import {reduxStorage} from './storage';
 
 // Slices
-import tasksSlice from './tasksSlice';
 import userSlice from './userSlice';
-import dummyNetwokSlice from './dummyNetwork';
 
 const rootReducer = combineReducers({
-  todos: tasksSlice,
   user: userSlice,
-  dummyNetwork: dummyNetwokSlice,
 });
 
 const persistConfig = {

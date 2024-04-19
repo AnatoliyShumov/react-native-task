@@ -24,22 +24,9 @@ const CustomHeader = ({
   return (
     <View style={styles.safeArea}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Table')}>
-          <RocketYellow />
-        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}} />
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity>
-          <AvatarCircle
-            url={userData.avatarUser}
-            size={45}
-            defaultImage={false}
-            borderWidth={2}
-            name={''}
-            borderColor="rgba(110, 91, 125, 1)"
-            containerStyles={{backgroundColor: '#DADADA'}}
-            onPress={() => navigation.navigate('Settings')}
-          />
-        </TouchableOpacity>
+        <TouchableOpacity />
       </View>
     </View>
   );
